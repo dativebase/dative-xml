@@ -1,42 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.dative.ca/" xmlns:ns1="http://www.dative.ca/">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.dative.ca/" xmlns:dt="http://www.dative.ca/">
   <xs:element name="dative">
     <xs:complexType>
       <xs:choice>
-        <xs:element ref="ns1:forms"/>
-        <xs:element ref="ns1:search"/>
-        <xs:element ref="ns1:corpus"/>
+        <xs:element ref="dt:forms"/>
+        <xs:element ref="dt:form"/>
+        <xs:element ref="dt:search"/>
+        <xs:element ref="dt:corpus"/>
       </xs:choice>
+      <xs:attribute name="version" use="required" form="qualified">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="0.1.0"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
     </xs:complexType>
   </xs:element>
   <xs:element name="forms">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:form"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="dt:form"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="search">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element ref="ns1:query"/>
-        <xs:element ref="ns1:forms"/>
+        <xs:element ref="dt:query"/>
+        <xs:element ref="dt:forms"/>
       </xs:choice>
     </xs:complexType>
   </xs:element>
   <xs:element name="corpus">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element ref="ns1:corpus_metadata"/>
-        <xs:element ref="ns1:forms"/>
+        <xs:element ref="dt:corpus_metadata"/>
+        <xs:element ref="dt:forms"/>
       </xs:choice>
     </xs:complexType>
   </xs:element>
   <xs:element name="query">
     <xs:complexType>
       <xs:all>
-        <xs:element ref="ns1:filter"/>
-        <xs:element ref="ns1:order_by"/>
+        <xs:element ref="dt:filter"/>
+        <xs:element ref="dt:order_by"/>
       </xs:all>
     </xs:complexType>
   </xs:element>
@@ -46,37 +54,38 @@
   <xs:element name="form">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element ref="ns1:files"/>
-        <xs:element ref="ns1:syntax"/>
-        <xs:element ref="ns1:morpheme_break_ids"/>
-        <xs:element ref="ns1:grammaticality"/>
-        <xs:element ref="ns1:datetime_modified"/>
-        <xs:element ref="ns1:morpheme_gloss_ids"/>
-        <xs:element ref="ns1:date_elicited"/>
-        <xs:element ref="ns1:morpheme_gloss"/>
-        <xs:element ref="ns1:id"/>
-        <xs:element ref="ns1:datetime_entered"/>
-        <xs:element ref="ns1:transcription"/>
-        <xs:element ref="ns1:enterer"/>
-        <xs:element ref="ns1:comments"/>
-        <xs:element ref="ns1:source"/>
-        <xs:element ref="ns1:verifier"/>
-        <xs:element ref="ns1:speaker"/>
-        <xs:element ref="ns1:speaker_comments"/>
-        <xs:element ref="ns1:status"/>
-        <xs:element ref="ns1:elicitor"/>
-        <xs:element ref="ns1:break_gloss_category"/>
-        <xs:element ref="ns1:tags"/>
-        <xs:element ref="ns1:elicitation_method"/>
-        <xs:element ref="ns1:translations"/>
-        <xs:element ref="ns1:syntactic_category"/>
-        <xs:element ref="ns1:phonetic_transcription"/>
-        <xs:element ref="ns1:semantics"/>
-        <xs:element ref="ns1:UUID"/>
-        <xs:element ref="ns1:narrow_phonetic_transcription"/>
-        <xs:element ref="ns1:syntactic_category_string"/>
-        <xs:element ref="ns1:morpheme_break"/>
-        <xs:element ref="ns1:modifier"/>
+        <xs:element ref="dt:files"/>
+        <xs:element ref="dt:syntax"/>
+        <xs:element ref="dt:morpheme_break_ids"/>
+        <xs:element ref="dt:grammaticality"/>
+        <xs:element ref="dt:datetime_modified"/>
+        <xs:element ref="dt:morpheme_gloss_ids"/>
+        <xs:element ref="dt:date_elicited"/>
+        <xs:element ref="dt:morpheme_gloss"/>
+        <xs:element ref="dt:id"/>
+        <xs:element ref="dt:datetime_entered"/>
+        <xs:element ref="dt:transcription"/>
+        <xs:element ref="dt:enterer"/>
+        <xs:element ref="dt:comments"/>
+        <xs:element ref="dt:source"/>
+        <xs:element ref="dt:verifier"/>
+        <xs:element ref="dt:speaker"/>
+        <xs:element ref="dt:speaker_comments"/>
+        <xs:element ref="dt:status"/>
+        <xs:element ref="dt:elicitor"/>
+        <xs:element ref="dt:break_gloss_category"/>
+        <xs:element ref="dt:tags"/>
+        <xs:element ref="dt:elicitation_method"/>
+        <xs:element ref="dt:translations"/>
+        <xs:element ref="dt:syntactic_category"/>
+        <xs:element ref="dt:phonetic_transcription"/>
+        <xs:element ref="dt:semantics"/>
+        <xs:element ref="dt:UUID"/>
+        <xs:element ref="dt:narrow_phonetic_transcription"/>
+        <xs:element ref="dt:syntactic_category_string"/>
+        <xs:element ref="dt:morpheme_break"/>
+        <xs:element ref="dt:modifier"/>
+        <xs:element ref="dt:collections"/>
       </xs:choice>
     </xs:complexType>
   </xs:element>
@@ -92,16 +101,16 @@
   <xs:element name="translations">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:translation"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="dt:translation"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="translation">
     <xs:complexType>
       <xs:all>
-        <xs:element ref="ns1:transcription"/>
-        <xs:element ref="ns1:grammaticality"/>
-        <xs:element ref="ns1:id"/>
+        <xs:element ref="dt:transcription"/>
+        <xs:element ref="dt:grammaticality"/>
+        <xs:element ref="dt:id"/>
       </xs:all>
     </xs:complexType>
   </xs:element>
@@ -134,10 +143,10 @@
   <xs:element name="enterer">
     <xs:complexType mixed="true">
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element ref="ns1:first_name"/>
-        <xs:element ref="ns1:last_name"/>
-        <xs:element ref="ns1:role"/>
-        <xs:element ref="ns1:id"/>
+        <xs:element ref="dt:first_name"/>
+        <xs:element ref="dt:last_name"/>
+        <xs:element ref="dt:role"/>
+        <xs:element ref="dt:id"/>
       </xs:choice>
     </xs:complexType>
   </xs:element>
@@ -155,40 +164,40 @@
   <xs:element name="modifier">
     <xs:complexType mixed="true">
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element ref="ns1:first_name"/>
-        <xs:element ref="ns1:last_name"/>
-        <xs:element ref="ns1:role"/>
-        <xs:element ref="ns1:id"/>
+        <xs:element ref="dt:first_name"/>
+        <xs:element ref="dt:last_name"/>
+        <xs:element ref="dt:role"/>
+        <xs:element ref="dt:id"/>
       </xs:choice>
     </xs:complexType>
   </xs:element>
   <xs:element name="elicitor">
     <xs:complexType mixed="true">
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element ref="ns1:first_name"/>
-        <xs:element ref="ns1:last_name"/>
-        <xs:element ref="ns1:role"/>
-        <xs:element ref="ns1:id"/>
+        <xs:element ref="dt:first_name"/>
+        <xs:element ref="dt:last_name"/>
+        <xs:element ref="dt:role"/>
+        <xs:element ref="dt:id"/>
       </xs:choice>
     </xs:complexType>
   </xs:element>
   <xs:element name="verifier">
     <xs:complexType mixed="true">
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element ref="ns1:first_name"/>
-        <xs:element ref="ns1:last_name"/>
-        <xs:element ref="ns1:role"/>
-        <xs:element ref="ns1:id"/>
+        <xs:element ref="dt:first_name"/>
+        <xs:element ref="dt:last_name"/>
+        <xs:element ref="dt:role"/>
+        <xs:element ref="dt:id"/>
       </xs:choice>
     </xs:complexType>
   </xs:element>
   <xs:element name="speaker">
     <xs:complexType mixed="true">
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element ref="ns1:dialect"/>
-        <xs:element ref="ns1:first_name"/>
-        <xs:element ref="ns1:last_name"/>
-        <xs:element ref="ns1:id"/>
+        <xs:element ref="dt:dialect"/>
+        <xs:element ref="dt:first_name"/>
+        <xs:element ref="dt:last_name"/>
+        <xs:element ref="dt:id"/>
       </xs:choice>
     </xs:complexType>
   </xs:element>
@@ -196,22 +205,22 @@
   <xs:element name="source">
     <xs:complexType mixed="true">
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element ref="ns1:chapter"/>
-        <xs:element ref="ns1:publisher"/>
-        <xs:element ref="ns1:school"/>
-        <xs:element ref="ns1:institution"/>
-        <xs:element ref="ns1:author"/>
-        <xs:element ref="ns1:journal"/>
-        <xs:element ref="ns1:title"/>
-        <xs:element ref="ns1:pages"/>
-        <xs:element ref="ns1:note"/>
-        <xs:element ref="ns1:editor"/>
-        <xs:element ref="ns1:key"/>
-        <xs:element ref="ns1:year"/>
-        <xs:element ref="ns1:booktitle"/>
-        <xs:element ref="ns1:type"/>
+        <xs:element ref="dt:chapter"/>
+        <xs:element ref="dt:publisher"/>
+        <xs:element ref="dt:school"/>
+        <xs:element ref="dt:institution"/>
+        <xs:element ref="dt:author"/>
+        <xs:element ref="dt:journal"/>
+        <xs:element ref="dt:title"/>
+        <xs:element ref="dt:pages"/>
+        <xs:element ref="dt:note"/>
+        <xs:element ref="dt:editor"/>
+        <xs:element ref="dt:key"/>
+        <xs:element ref="dt:year"/>
+        <xs:element ref="dt:booktitle"/>
+        <xs:element ref="dt:type"/>
         <xs:element name="id" type="xs:string"/>
-        <xs:element ref="ns1:crossref"/>
+        <xs:element ref="dt:crossref"/>
       </xs:choice>
     </xs:complexType>
   </xs:element>
@@ -233,8 +242,8 @@
   <xs:element name="elicitation_method">
     <xs:complexType mixed="true">
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element ref="ns1:id"/>
-        <xs:element ref="ns1:name"/>
+        <xs:element ref="dt:id"/>
+        <xs:element ref="dt:name"/>
       </xs:choice>
     </xs:complexType>
   </xs:element>
@@ -242,43 +251,43 @@
   <xs:element name="syntactic_category">
     <xs:complexType mixed="true">
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element ref="ns1:id"/>
-        <xs:element ref="ns1:name"/>
+        <xs:element ref="dt:id"/>
+        <xs:element ref="dt:name"/>
       </xs:choice>
     </xs:complexType>
   </xs:element>
   <xs:element name="tags">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:tag"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="dt:tag"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="tag">
     <xs:complexType>
       <xs:all>
-        <xs:element ref="ns1:id"/>
-        <xs:element ref="ns1:name"/>
+        <xs:element ref="dt:id"/>
+        <xs:element ref="dt:name"/>
       </xs:all>
     </xs:complexType>
   </xs:element>
   <xs:element name="files">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:file"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="dt:file"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="file">
     <xs:complexType>
       <xs:all>
-        <xs:element ref="ns1:name"/>
-        <xs:element ref="ns1:url"/>
-        <xs:element ref="ns1:filename"/>
-        <xs:element ref="ns1:lossy_filename"/>
-        <xs:element ref="ns1:id"/>
-        <xs:element ref="ns1:MIME_type"/>
-        <xs:element ref="ns1:size"/>
+        <xs:element ref="dt:name"/>
+        <xs:element ref="dt:url"/>
+        <xs:element ref="dt:filename"/>
+        <xs:element ref="dt:lossy_filename"/>
+        <xs:element ref="dt:id"/>
+        <xs:element ref="dt:MIME_type"/>
+        <xs:element ref="dt:size"/>
       </xs:all>
     </xs:complexType>
   </xs:element>
@@ -287,6 +296,7 @@
   <xs:element name="lossy_filename" type="xs:string"/>
   <xs:element name="MIME_type" type="xs:string"/>
   <xs:element name="size" type="xs:int"/>
+  <xs:element name="collections" type="xs:string"/>
   <xs:element name="syntax" type="xs:string"/>
   <xs:element name="semantics" type="xs:string"/>
 </xs:schema>
