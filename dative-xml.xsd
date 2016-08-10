@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.dative.ca/" xmlns:ns1="http://www.dative.ca/">
+  <xs:element name="dative">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element ref="ns1:forms"/>
+        <xs:element ref="ns1:search"/>
+        <xs:element ref="ns1:corpus"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="forms">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:form"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="search">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="ns1:query"/>
+        <xs:element ref="ns1:forms"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="corpus">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="ns1:corpus_metadata"/>
+        <xs:element ref="ns1:forms"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="query">
+    <xs:complexType>
+      <xs:all>
+        <xs:element ref="ns1:filter"/>
+        <xs:element ref="ns1:order_by"/>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="filter" type="xs:string"/>
+  <xs:element name="order_by" type="xs:string"/>
+  <xs:element name="corpus_metadata" type="xs:string"/>
+  <xs:element name="form">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="ns1:files"/>
+        <xs:element ref="ns1:syntax"/>
+        <xs:element ref="ns1:morpheme_break_ids"/>
+        <xs:element ref="ns1:grammaticality"/>
+        <xs:element ref="ns1:datetime_modified"/>
+        <xs:element ref="ns1:morpheme_gloss_ids"/>
+        <xs:element ref="ns1:date_elicited"/>
+        <xs:element ref="ns1:morpheme_gloss"/>
+        <xs:element ref="ns1:id"/>
+        <xs:element ref="ns1:datetime_entered"/>
+        <xs:element ref="ns1:transcription"/>
+        <xs:element ref="ns1:enterer"/>
+        <xs:element ref="ns1:comments"/>
+        <xs:element ref="ns1:source"/>
+        <xs:element ref="ns1:verifier"/>
+        <xs:element ref="ns1:speaker"/>
+        <xs:element ref="ns1:speaker_comments"/>
+        <xs:element ref="ns1:status"/>
+        <xs:element ref="ns1:elicitor"/>
+        <xs:element ref="ns1:break_gloss_category"/>
+        <xs:element ref="ns1:tags"/>
+        <xs:element ref="ns1:elicitation_method"/>
+        <xs:element ref="ns1:translations"/>
+        <xs:element ref="ns1:syntactic_category"/>
+        <xs:element ref="ns1:phonetic_transcription"/>
+        <xs:element ref="ns1:semantics"/>
+        <xs:element ref="ns1:UUID"/>
+        <xs:element ref="ns1:narrow_phonetic_transcription"/>
+        <xs:element ref="ns1:syntactic_category_string"/>
+        <xs:element ref="ns1:morpheme_break"/>
+        <xs:element ref="ns1:modifier"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="id" type="xs:int"/>
+  <xs:element name="UUID" type="xs:string"/>
+  <xs:element name="grammaticality" type="xs:string"/>
+  <xs:element name="narrow_phonetic_transcription" type="xs:string"/>
+  <xs:element name="phonetic_transcription" type="xs:string"/>
+  <xs:element name="transcription" type="xs:string"/>
+  <xs:element name="morpheme_gloss" type="xs:string"/>
+  <xs:element name="morpheme_break" type="xs:string"/>
+  <xs:element name="syntactic_category_string" type="xs:string"/>
+  <xs:element name="translations">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:translation"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="translation">
+    <xs:complexType>
+      <xs:all>
+        <xs:element ref="ns1:transcription"/>
+        <xs:element ref="ns1:grammaticality"/>
+        <xs:element ref="ns1:id"/>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="morpheme_break_ids" type="xs:string"/>
+  <xs:element name="morpheme_gloss_ids" type="xs:string"/>
+  <xs:element name="break_gloss_category" type="xs:string"/>
+  <xs:element name="datetime_entered" type="xs:dateTime"/>
+  <xs:element name="datetime_modified" type="xs:dateTime"/>
+  <xs:element name="date_elicited">
+    <xs:simpleType>
+      <xs:union memberTypes="xs:date">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value=""/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:union>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="comments" type="xs:string"/>
+  <xs:element name="speaker_comments" type="xs:string"/>
+  <xs:element name="status">
+    <xs:simpleType>
+      <xs:restriction base="xs:token">
+        <xs:enumeration value="tested"/>
+        <xs:enumeration value="requires testing"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="enterer">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="ns1:first_name"/>
+        <xs:element ref="ns1:last_name"/>
+        <xs:element ref="ns1:role"/>
+        <xs:element ref="ns1:id"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="first_name" type="xs:string"/>
+  <xs:element name="last_name" type="xs:string"/>
+  <xs:element name="role">
+    <xs:simpleType>
+      <xs:restriction base="xs:token">
+        <xs:enumeration value="administrator"/>
+        <xs:enumeration value="contributor"/>
+        <xs:enumeration value="viewer"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="modifier">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="ns1:first_name"/>
+        <xs:element ref="ns1:last_name"/>
+        <xs:element ref="ns1:role"/>
+        <xs:element ref="ns1:id"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="elicitor">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="ns1:first_name"/>
+        <xs:element ref="ns1:last_name"/>
+        <xs:element ref="ns1:role"/>
+        <xs:element ref="ns1:id"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="verifier">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="ns1:first_name"/>
+        <xs:element ref="ns1:last_name"/>
+        <xs:element ref="ns1:role"/>
+        <xs:element ref="ns1:id"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="speaker">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="ns1:dialect"/>
+        <xs:element ref="ns1:first_name"/>
+        <xs:element ref="ns1:last_name"/>
+        <xs:element ref="ns1:id"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="dialect" type="xs:string"/>
+  <xs:element name="source">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="ns1:chapter"/>
+        <xs:element ref="ns1:publisher"/>
+        <xs:element ref="ns1:school"/>
+        <xs:element ref="ns1:institution"/>
+        <xs:element ref="ns1:author"/>
+        <xs:element ref="ns1:journal"/>
+        <xs:element ref="ns1:title"/>
+        <xs:element ref="ns1:pages"/>
+        <xs:element ref="ns1:note"/>
+        <xs:element ref="ns1:editor"/>
+        <xs:element ref="ns1:key"/>
+        <xs:element ref="ns1:year"/>
+        <xs:element ref="ns1:booktitle"/>
+        <xs:element ref="ns1:type"/>
+        <xs:element name="id" type="xs:string"/>
+        <xs:element ref="ns1:crossref"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="chapter" type="xs:string"/>
+  <xs:element name="publisher" type="xs:string"/>
+  <xs:element name="school" type="xs:string"/>
+  <xs:element name="institution" type="xs:string"/>
+  <xs:element name="author" type="xs:string"/>
+  <xs:element name="journal" type="xs:string"/>
+  <xs:element name="title" type="xs:string"/>
+  <xs:element name="pages" type="xs:string"/>
+  <xs:element name="note" type="xs:string"/>
+  <xs:element name="editor" type="xs:string"/>
+  <xs:element name="key" type="xs:string"/>
+  <xs:element name="year" type="xs:string"/>
+  <xs:element name="booktitle" type="xs:string"/>
+  <xs:element name="type" type="xs:string"/>
+  <xs:element name="crossref" type="xs:string"/>
+  <xs:element name="elicitation_method">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="ns1:id"/>
+        <xs:element ref="ns1:name"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="name" type="xs:string"/>
+  <xs:element name="syntactic_category">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="ns1:id"/>
+        <xs:element ref="ns1:name"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="tags">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:tag"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="tag">
+    <xs:complexType>
+      <xs:all>
+        <xs:element ref="ns1:id"/>
+        <xs:element ref="ns1:name"/>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="files">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:file"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="file">
+    <xs:complexType>
+      <xs:all>
+        <xs:element ref="ns1:name"/>
+        <xs:element ref="ns1:url"/>
+        <xs:element ref="ns1:filename"/>
+        <xs:element ref="ns1:lossy_filename"/>
+        <xs:element ref="ns1:id"/>
+        <xs:element ref="ns1:MIME_type"/>
+        <xs:element ref="ns1:size"/>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="url" type="xs:string"/>
+  <xs:element name="filename" type="xs:string"/>
+  <xs:element name="lossy_filename" type="xs:string"/>
+  <xs:element name="MIME_type" type="xs:string"/>
+  <xs:element name="size" type="xs:int"/>
+  <xs:element name="syntax" type="xs:string"/>
+  <xs:element name="semantics" type="xs:string"/>
+</xs:schema>

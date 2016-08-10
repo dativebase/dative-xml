@@ -1,0 +1,186 @@
+# A RELAX NG compact syntax pattern for Dative XML.
+# This pattern can be used to validate a Dative XML document.
+# It should be accompanied by a Python validation file called
+# dative-xml-validate.py which can be used to validate as follows:
+#
+#     $ python dative-xml-validate.py xml-file relaxng-file
+#
+# TODO: make the elements alphabetically ordered.
+# TODO: alternatively, allow for any order of elements using & instead of ,
+
+default namespace = "http://www.dative.ca/"
+namespace dt = "http://www.dative.ca/"
+
+
+start = Dative
+Dative = element dative {
+    attribute dt:version { "0.1.0" },
+    ( Forms | Form | Search | Corpus )
+}
+
+Forms = element forms { Form* }
+Search = element search { Query & Forms }
+Corpus = element corpus { CorpusMeta & Forms }
+
+Query = element query {
+  element filter { text } &
+  element order_by { text }
+}
+
+# TODO
+# CorpusMeta = element corpus_metadata {
+# }
+CorpusMeta = element corpus_metadata { text }
+
+Form = element form {
+  Files &
+  Syntax &
+  MorphemeBreakIDs &
+  Grammaticality &
+  DatetimeModified &
+  MorphemeGlossIDs &
+  DateElicited &
+  MorphemeGloss &
+  Id &
+  DatetimeEntered &
+  Transcription &
+  Enterer &
+  Comments &
+  Source &
+  Verifier &
+  Speaker &
+  SpeakerComments &
+  Status &
+  Elicitor &
+  BreakGlossCategory &
+  Tags &
+  ElicitationMethod &
+  Translations &
+  SyntacticCategory &
+  PhoneticTranscription &
+  Semantics &
+  UUID_DEF &
+  NarrowPhoneticTranscription &
+  SyntacticCategoryString &
+  MorphemeBreak &
+  Modifier &
+  Collections?
+}
+
+
+Id = element id { xsd:int }
+UUID_DEF = element UUID { text }
+
+Grammaticality = element grammaticality { text }
+NarrowPhoneticTranscription = element narrow_phonetic_transcription { text }
+PhoneticTranscription = element phonetic_transcription { text }
+Transcription = element transcription { text }
+MorphemeGloss = element morpheme_gloss { text }
+MorphemeBreak = element morpheme_break { text }
+SyntacticCategoryString = element syntactic_category_string { text }
+
+Translations = element translations { Translation* }
+Translation = element translation {
+  element transcription { text } &
+  element grammaticality { text } &
+  element id { xsd:int}
+}
+
+MorphemeBreakIDs = element morpheme_break_ids { text }
+MorphemeGlossIDs = element morpheme_gloss_ids { text }
+BreakGlossCategory = element break_gloss_category { text }
+
+DatetimeEntered = element datetime_entered { xsd:dateTime }  # should match 2016-08-10T16:56:37.662854
+DatetimeModified = element datetime_modified { xsd:dateTime }  # should match 2016-08-10T16:56:37.662854
+DateElicited = element date_elicited { xsd:date | "" } # should match 2016-08-10
+
+Comments = element comments { text }
+SpeakerComments = element speaker_comments { text }
+Status = element status { "tested" | "requires testing" }
+
+Enterer = element enterer {(
+  element first_name { text } &
+  element last_name { text } &
+  element role { "administrator" | "contributor" | "viewer" } &
+  element id { xsd:int }) | ""
+}
+Modifier = element modifier {(
+  element first_name { text } &
+  element last_name { text } &
+  element role { "administrator" | "contributor" | "viewer" } &
+  element id { xsd:int }) | ""
+}
+Elicitor = element elicitor {(
+  element first_name { text } &
+  element last_name { text } &
+  element role { "administrator" | "contributor" | "viewer" } &
+  element id { xsd:int }) | ""
+}
+Verifier = element verifier {(
+  element first_name { text } &
+  element last_name { text } &
+  element role { "administrator" | "contributor" | "viewer" } &
+  element id { xsd:int }) | ""
+}
+
+Speaker = element speaker {(
+  element dialect { text } &
+  element first_name { text } &
+  element last_name { text } &
+  element id { xsd:int }) | ""
+}
+
+# TODO: the source element can be much more complex than this ...
+Source = element source {(
+  element chapter { text } &
+  element publisher { text } &
+  element school { text } &
+  element institution { text } &
+  element author { text } &
+  element journal { text } &
+  element title { text } &
+  element pages { text } &
+  element note { text } &
+  element editor { text } &
+  element key { text } &
+  element year { text } &
+  element booktitle { text } &
+  element type { text } &
+  element id { text } &
+  element crossref { text }) | ""
+}
+
+ElicitationMethod = element elicitation_method {(
+  element id { xsd:int } &
+  element name { text }) | ""
+}
+
+SyntacticCategory = element syntactic_category {(
+  element id { xsd:int } &
+  element name { text }) | ""
+}
+
+Tags = element tags { Tag* }
+Tag = element tag {
+  element id { xsd:int } &
+  element name { text }
+}
+
+Files = element files { File* }
+File = element file {
+  element name { text } &
+  element url { text } &
+  element filename { text } &
+  element lossy_filename { text } &
+  element id { xsd:int } &
+  element MIME_type { text } &
+  element size { xsd:int }
+}
+
+# TODO: this shouldn't be in here. For some reason Dative is creating an empty
+# <collections> element; probably a Backbone artifact and not really from the
+# underlying data structure.
+Collections = element collections { text }
+
+Syntax = element syntax { text }
+Semantics = element semantics { text }

@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+         ns="http://www.dative.ca/"
+         xmlns:dt="http://www.dative.ca/"
+         datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  <start>
+    <ref name="Dative"/>
+  </start>
+  <define name="Dative">
+    <element>
+      <name ns="http://www.dative.ca/">dative</name>
+      <attribute>
+        <name ns="http://www.dative.ca/">version</name>
+        <value>0.1.0</value>
+      </attribute>
+      <choice>
+        <ref name="Forms"/>
+        <ref name="Form"/>
+        <ref name="Search"/>
+        <ref name="Corpus"/>
+      </choice>
+    </element>
+  </define>
+  <define name="Forms">
+    <element>
+      <name ns="http://www.dative.ca/">forms</name>
+      <zeroOrMore>
+        <ref name="Form"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="Search">
+    <element>
+      <name ns="http://www.dative.ca/">search</name>
+      <interleave>
+        <ref name="Query"/>
+        <ref name="Forms"/>
+      </interleave>
+    </element>
+  </define>
+  <define name="Corpus">
+    <element>
+      <name ns="http://www.dative.ca/">corpus</name>
+      <interleave>
+        <ref name="CorpusMeta"/>
+        <ref name="Forms"/>
+      </interleave>
+    </element>
+  </define>
+  <define name="Query">
+    <element>
+      <name ns="http://www.dative.ca/">query</name>
+      <interleave>
+        <element>
+          <name ns="http://www.dative.ca/">filter</name>
+          <text/>
+        </element>
+        <element>
+          <name ns="http://www.dative.ca/">order_by</name>
+          <text/>
+        </element>
+      </interleave>
+    </element>
+  </define>
+  <define name="CorpusMeta">
+    <element>
+      <name ns="http://www.dative.ca/">corpus_metadata</name>
+      <text/>
+    </element>
+  </define>
+  <define name="Form">
+    <element>
+      <name ns="http://www.dative.ca/">form</name>
+      <interleave>
+        <ref name="Files"/>
+        <ref name="Syntax"/>
+        <ref name="MorphemeBreakIDs"/>
+        <ref name="Grammaticality"/>
+        <ref name="DatetimeModified"/>
+        <ref name="MorphemeGlossIDs"/>
+        <ref name="DateElicited"/>
+        <ref name="MorphemeGloss"/>
+        <ref name="Id"/>
+        <ref name="DatetimeEntered"/>
+        <ref name="Transcription"/>
+        <ref name="Enterer"/>
+        <ref name="Comments"/>
+        <ref name="Source"/>
+        <ref name="Verifier"/>
+        <ref name="Speaker"/>
+        <ref name="SpeakerComments"/>
+        <ref name="Status"/>
+        <ref name="Elicitor"/>
+        <ref name="BreakGlossCategory"/>
+        <ref name="Tags"/>
+        <ref name="ElicitationMethod"/>
+        <ref name="Translations"/>
+        <ref name="SyntacticCategory"/>
+        <ref name="PhoneticTranscription"/>
+        <ref name="Semantics"/>
+        <ref name="UUID_DEF"/>
+        <ref name="NarrowPhoneticTranscription"/>
+        <ref name="SyntacticCategoryString"/>
+        <ref name="MorphemeBreak"/>
+        <ref name="Modifier"/>
+        <optional>
+          <ref name="Collections"/>
+        </optional>
+      </interleave>
+    </element>
+  </define>
+  <define name="Id">
+    <element>
+      <name ns="http://www.dative.ca/">id</name>
+      <data type="int"/>
+    </element>
+  </define>
+  <define name="UUID_DEF">
+    <element>
+      <name ns="http://www.dative.ca/">UUID</name>
+      <text/>
+    </element>
+  </define>
+  <define name="Grammaticality">
+    <element>
+      <name ns="http://www.dative.ca/">grammaticality</name>
+      <text/>
+    </element>
+  </define>
+  <define name="NarrowPhoneticTranscription">
+    <element>
+      <name ns="http://www.dative.ca/">narrow_phonetic_transcription</name>
+      <text/>
+    </element>
+  </define>
+  <define name="PhoneticTranscription">
+    <element>
+      <name ns="http://www.dative.ca/">phonetic_transcription</name>
+      <text/>
+    </element>
+  </define>
+  <define name="Transcription">
+    <element>
+      <name ns="http://www.dative.ca/">transcription</name>
+      <text/>
+    </element>
+  </define>
+  <define name="MorphemeGloss">
+    <element>
+      <name ns="http://www.dative.ca/">morpheme_gloss</name>
+      <text/>
+    </element>
+  </define>
+  <define name="MorphemeBreak">
+    <element>
+      <name ns="http://www.dative.ca/">morpheme_break</name>
+      <text/>
+    </element>
+  </define>
+  <define name="SyntacticCategoryString">
+    <element>
+      <name ns="http://www.dative.ca/">syntactic_category_string</name>
+      <text/>
+    </element>
+  </define>
+  <define name="Translations">
+    <element>
+      <name ns="http://www.dative.ca/">translations</name>
+      <zeroOrMore>
+        <ref name="Translation"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="Translation">
+    <element>
+      <name ns="http://www.dative.ca/">translation</name>
+      <interleave>
+        <element>
+          <name ns="http://www.dative.ca/">transcription</name>
+          <text/>
+        </element>
+        <element>
+          <name ns="http://www.dative.ca/">grammaticality</name>
+          <text/>
+        </element>
+        <element>
+          <name ns="http://www.dative.ca/">id</name>
+          <data type="int"/>
+        </element>
+      </interleave>
+    </element>
+  </define>
+  <define name="MorphemeBreakIDs">
+    <element>
+      <name ns="http://www.dative.ca/">morpheme_break_ids</name>
+      <text/>
+    </element>
+  </define>
+  <define name="MorphemeGlossIDs">
+    <element>
+      <name ns="http://www.dative.ca/">morpheme_gloss_ids</name>
+      <text/>
+    </element>
+  </define>
+  <define name="BreakGlossCategory">
+    <element>
+      <name ns="http://www.dative.ca/">break_gloss_category</name>
+      <text/>
+    </element>
+  </define>
+  <define name="DatetimeEntered">
+    <element>
+      <name ns="http://www.dative.ca/">datetime_entered</name>
+      <data type="dateTime"/>
+    </element>
+  </define>
+  <define name="DatetimeModified">
+    <element>
+      <name ns="http://www.dative.ca/">datetime_modified</name>
+      <data type="dateTime"/>
+    </element>
+  </define>
+  <define name="DateElicited">
+    <element>
+      <name ns="http://www.dative.ca/">date_elicited</name>
+      <choice>
+        <data type="date"/>
+        <value></value>
+      </choice>
+    </element>
+  </define>
+  <define name="Comments">
+    <element>
+      <name ns="http://www.dative.ca/">comments</name>
+      <text/>
+    </element>
+  </define>
+  <define name="SpeakerComments">
+    <element>
+      <name ns="http://www.dative.ca/">speaker_comments</name>
+      <text/>
+    </element>
+  </define>
+  <define name="Status">
+    <element>
+      <name ns="http://www.dative.ca/">status</name>
+      <choice>
+        <value>tested</value>
+        <value>requires testing</value>
+      </choice>
+    </element>
+  </define>
+  <define name="Enterer">
+    <element>
+      <name ns="http://www.dative.ca/">enterer</name>
+      <choice>
+        <interleave>
+          <element>
+            <name ns="http://www.dative.ca/">first_name</name>
+            <text/>
+          </element>
+          <element>
+            <name ns="http://www.dative.ca/">last_name</name>
+            <text/>
+          </element>
+          <element>
+            <name ns="http://www.dative.ca/">role</name>
+            <choice>
+              <value>administrator</value>
+              <value>contributor</value>
+              <value>viewer</value>
+            </choice>
+          </element>
+          <element>
+            <name ns="http://www.dative.ca/">id</name>
+            <data type="int"/>
+          </element>
+        </interleave>
+        <value></value>
+      </choice>
+    </element>
+  </define>
+  <define name="Modifier">
+    <element>
+      <name ns="http://www.dative.ca/">modifier</name>
+      <choice>
+        <interleave>
+          <element>
+            <name ns="http://www.dative.ca/">first_name</name>
+            <text/>
+          </element>
+          <element>
+            <name ns="http://www.dative.ca/">last_name</name>
+            <text/>
+          </element>
+          <element>
+            <name ns="http://www.dative.ca/">role</name>
+            <choice>
+              <value>administrator</value>
+              <value>contributor</value>
+              <value>viewer</value>
+            </choice>
+          </element>
+          <element>
+            <name ns="http://www.dative.ca/">id</name>
+            <data type="int"/>
+          </element>
+        </interleave>
+        <value></value>
+      </choice>
+    </element>
+  </define>
+  <define name="Elicitor">
+    <element>
+      <name ns="http://www.dative.ca/">elicitor</name>
+      <choice>
+        <interleave>
+          <element>
+            <name ns="http://www.dative.ca/">first_name</name>
+            <text/>
+          </element>
+          <element>
+            <name ns="http://www.dative.ca/">last_name</name>
+            <text/>
+          </element>
+          <element>
+            <name ns="http://www.dative.ca/">role</name>
+            <choice>
+              <value>administrator</value>
+              <value>contributor</value>
+              <value>viewer</value>
+            </choice>
+          </element>
+          <element>
+            <name ns="http://www.dative.ca/">id</name>
+            <data type="int"/>
+          </element>
+        </interleave>
+        <value></value>
+      </choice>
+    </element>
+  </define>
+  <define name="Verifier">
+    <element>
+      <name ns="http://www.dative.ca/">verifier</name>
+      <choice>
+        <interleave>
+          <element>
+            <name ns="http://www.dative.ca/">first_name</name>
+            <text/>
+          </element>
+          <element>
+            <name ns="http://www.dative.ca/">last_name</name>
+            <text/>
+          </element>
+          <element>
+            <name ns="http://www.dative.ca/">role</name>
+            <choice>
+              <value>administrator</value>
+              <value>contributor</value>
+              <value>viewer</value>
+            </choice>
+          </element>
+          <element>
+            <name ns="http://www.dative.ca/">id</name>
+            <data type="int"/>
+          </element>
+        </interleave>
+        <value></value>
+      </choice>
+    </element>
+  </define>
+  <define name="Speaker">
+    <element>
+      <name ns="http://www.dative.ca/">speaker</name>
+      <choice>
+        <interleave>
+          <element>
+            <name ns="http://www.dative.ca/">dialect</name>
+            <text/>
+          </element>
+          <element>
+            <name ns="http://www.dative.ca/">first_name</name>
+            <text/>
+          </element>
+          <element>
+            <name ns="http://www.dative.ca/">last_name</name>
+            <text/>
+          </element>
+          <element>
+            <name ns="http://www.dative.ca/">id</name>
+            <data type="int"/>
+          </element>
+        </interleave>
+        <value></value>
+      </choice>
+    </element>
+  </define>
+  <define name="Source">
+    <element>
+      <name ns="http://www.dative.ca/">source</name>
+      <choice>
+        <interleave>
+          <element>
+            <name ns="http://www.dative.ca/">chapter</name>
+            <text/>
+          </element>
+          <element>
+            <name ns="http://www.dative.ca/">publisher</name>
+            <text/>
+          </element>
+          <element>
+            <name ns="http://www.dative.ca/">school</name>
+            <text/>
+          </element>
+          <element>
+            <name ns="http://www.dative.ca/">institution</name>
+            <text/>
+          </element>
+          <element>
+            <name ns="http://www.dative.ca/">author</name>
+            <text/>
+          </element>
+          <element>
+            <name ns="http://www.dative.ca/">journal</name>
+            <text/>
+          </element>
+          <element>
+            <name ns="http://www.dative.ca/">title</name>
+            <text/>
+          </element>
+          <element>
+            <name ns="http://www.dative.ca/">pages</name>
+            <text/>
+          </element>
+          <element>
+            <name ns="http://www.dative.ca/">note</name>
+            <text/>
+          </element>
+          <element>
+            <name ns="http://www.dative.ca/">editor</name>
+            <text/>
+          </element>
+          <element>
+            <name ns="http://www.dative.ca/">key</name>
+            <text/>
+          </element>
+          <element>
+            <name ns="http://www.dative.ca/">year</name>
+            <text/>
+          </element>
+          <element>
+            <name ns="http://www.dative.ca/">booktitle</name>
+            <text/>
+          </element>
+          <element>
+            <name ns="http://www.dative.ca/">type</name>
+            <text/>
+          </element>
+          <element>
+            <name ns="http://www.dative.ca/">id</name>
+            <text/>
+          </element>
+          <element>
+            <name ns="http://www.dative.ca/">crossref</name>
+            <text/>
+          </element>
+        </interleave>
+        <value></value>
+      </choice>
+    </element>
+  </define>
+  <define name="ElicitationMethod">
+    <element>
+      <name ns="http://www.dative.ca/">elicitation_method</name>
+      <choice>
+        <interleave>
+          <element>
+            <name ns="http://www.dative.ca/">id</name>
+            <data type="int"/>
+          </element>
+          <element>
+            <name ns="http://www.dative.ca/">name</name>
+            <text/>
+          </element>
+        </interleave>
+        <value></value>
+      </choice>
+    </element>
+  </define>
+  <define name="SyntacticCategory">
+    <element>
+      <name ns="http://www.dative.ca/">syntactic_category</name>
+      <choice>
+        <interleave>
+          <element>
+            <name ns="http://www.dative.ca/">id</name>
+            <data type="int"/>
+          </element>
+          <element>
+            <name ns="http://www.dative.ca/">name</name>
+            <text/>
+          </element>
+        </interleave>
+        <value></value>
+      </choice>
+    </element>
+  </define>
+  <define name="Tags">
+    <element>
+      <name ns="http://www.dative.ca/">tags</name>
+      <zeroOrMore>
+        <ref name="Tag"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="Tag">
+    <element>
+      <name ns="http://www.dative.ca/">tag</name>
+      <interleave>
+        <element>
+          <name ns="http://www.dative.ca/">id</name>
+          <data type="int"/>
+        </element>
+        <element>
+          <name ns="http://www.dative.ca/">name</name>
+          <text/>
+        </element>
+      </interleave>
+    </element>
+  </define>
+  <define name="Files">
+    <element>
+      <name ns="http://www.dative.ca/">files</name>
+      <zeroOrMore>
+        <ref name="File"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="File">
+    <element>
+      <name ns="http://www.dative.ca/">file</name>
+      <interleave>
+        <element>
+          <name ns="http://www.dative.ca/">name</name>
+          <text/>
+        </element>
+        <element>
+          <name ns="http://www.dative.ca/">url</name>
+          <text/>
+        </element>
+        <element>
+          <name ns="http://www.dative.ca/">filename</name>
+          <text/>
+        </element>
+        <element>
+          <name ns="http://www.dative.ca/">lossy_filename</name>
+          <text/>
+        </element>
+        <element>
+          <name ns="http://www.dative.ca/">id</name>
+          <data type="int"/>
+        </element>
+        <element>
+          <name ns="http://www.dative.ca/">MIME_type</name>
+          <text/>
+        </element>
+        <element>
+          <name ns="http://www.dative.ca/">size</name>
+          <data type="int"/>
+        </element>
+      </interleave>
+    </element>
+  </define>
+  <define name="Collections">
+    <element>
+      <name ns="http://www.dative.ca/">collections</name>
+      <text/>
+    </element>
+  </define>
+  <define name="Syntax">
+    <element>
+      <name ns="http://www.dative.ca/">syntax</name>
+      <text/>
+    </element>
+  </define>
+  <define name="Semantics">
+    <element>
+      <name ns="http://www.dative.ca/">semantics</name>
+      <text/>
+    </element>
+  </define>
+</grammar>
