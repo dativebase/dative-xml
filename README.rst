@@ -19,3 +19,10 @@ Datatype (.xsd) document with the following command::
 
     $ trang -I rng -O xsd dative-xml.rng dative-xml.xsd
 
+TODOs
+================================================================================
+
+1. Write Selenium or PhantomJS scripts that download every possible type of XML
+   export from a live Dative system with data in it and then run them through
+   the Python validator to confirm they are valid.
+
