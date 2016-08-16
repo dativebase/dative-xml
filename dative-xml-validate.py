@@ -3,7 +3,12 @@ document against a Dative Relax NG pattern (schema) in compact form.
 
 Usage::
 
-    $ python dative-xml-validate.py xml-file relaxng-file
+    $ python dative-xml-validate.py xmlfile-to-be-validated.xml dative-xml.rnc
+
+If there only one argument is provided, this script assumes there is a file in
+its directory called dative-xml.rnc::
+
+    $ python dative-xml-validate.py xmlfile-to-be-validated.xml
 
 Requirements:
 
@@ -81,9 +86,19 @@ def validate(xml_file_path, rnc_file_path):
         fail(relaxng.error_log.last_error)
 
 
+def exit_usage():
+    sys.exit('Usage: dative-xml-validate.py file-to-be-validated.xml (dative-xml.rnc)')
+
+
 if __name__ == '__main__':
 
-    if len(sys.argv) != 3:
-        sys.exit('Usage: dative-xml-validate.py xml-file relaxng-file')
-    xml_file_path, rnc_file_path = sys.argv[1:]
+    if len(sys.argv) == 3:
+        xml_file_path, rnc_file_path = sys.argv[1:]
+    elif len(sys.argv) == 2:
+        rnc_file_path = 'dative-xml.rnc'
+        if not os.path.isfile(rnc_file_path):
+            exit_usage()
+        xml_file_path = sys.argv[1]
+    else:
+        exit_usage()
     validate(xml_file_path, rnc_file_path)
