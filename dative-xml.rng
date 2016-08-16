@@ -15,10 +15,27 @@
       </attribute>
       <choice>
         <ref name="Forms"/>
-        <ref name="Form"/>
-        <ref name="Search"/>
-        <ref name="Corpus"/>
+        <ref name="Files"/>
+        <ref name="SearchOverForms"/>
+        <ref name="CorpusWithForms"/>
       </choice>
+    </element>
+  </define>
+  <define name="CorpusWithForms">
+    <element>
+      <name ns="http://www.dative.ca/">corpus</name>
+      <interleave>
+        <ref name="CorpusMeta"/>
+        <ref name="Forms"/>
+      </interleave>
+    </element>
+  </define>
+  <define name="Files">
+    <element>
+      <name ns="http://www.dative.ca/">files</name>
+      <zeroOrMore>
+        <ref name="File"/>
+      </zeroOrMore>
     </element>
   </define>
   <define name="Forms">
@@ -29,27 +46,26 @@
       </zeroOrMore>
     </element>
   </define>
-  <define name="Search">
+  <define name="SearchOverForms">
     <element>
       <name ns="http://www.dative.ca/">search</name>
       <interleave>
-        <ref name="Query"/>
+        <ref name="Search"/>
         <ref name="Forms"/>
       </interleave>
     </element>
   </define>
-  <define name="Corpus">
+  <define name="Tags">
     <element>
-      <name ns="http://www.dative.ca/">corpus</name>
-      <interleave>
-        <ref name="CorpusMeta"/>
-        <ref name="Forms"/>
-      </interleave>
+      <name ns="http://www.dative.ca/">tags</name>
+      <zeroOrMore>
+        <ref name="Tag"/>
+      </zeroOrMore>
     </element>
   </define>
-  <define name="Query">
+  <define name="Search">
     <element>
-      <name ns="http://www.dative.ca/">query</name>
+      <name ns="http://www.dative.ca/">search</name>
       <interleave>
         <element>
           <name ns="http://www.dative.ca/">filter</name>
@@ -506,14 +522,6 @@
       </choice>
     </element>
   </define>
-  <define name="Tags">
-    <element>
-      <name ns="http://www.dative.ca/">tags</name>
-      <zeroOrMore>
-        <ref name="Tag"/>
-      </zeroOrMore>
-    </element>
-  </define>
   <define name="Tag">
     <element>
       <name ns="http://www.dative.ca/">tag</name>
@@ -527,14 +535,6 @@
           <text/>
         </element>
       </interleave>
-    </element>
-  </define>
-  <define name="Files">
-    <element>
-      <name ns="http://www.dative.ca/">files</name>
-      <zeroOrMore>
-        <ref name="File"/>
-      </zeroOrMore>
     </element>
   </define>
   <define name="File">
@@ -569,6 +569,81 @@
           <name ns="http://www.dative.ca/">size</name>
           <data type="int"/>
         </element>
+        <optional>
+          <element>
+            <name ns="http://www.dative.ca/">parent_file</name>
+            <text/>
+          </element>
+        </optional>
+        <optional>
+          <element>
+            <name ns="http://www.dative.ca/">datetime_entered</name>
+            <data type="dateTime"/>
+          </element>
+        </optional>
+        <optional>
+          <element>
+            <name ns="http://www.dative.ca/">datetime_modified</name>
+            <data type="dateTime"/>
+          </element>
+        </optional>
+        <optional>
+          <element>
+            <name ns="http://www.dative.ca/">date_elicited</name>
+            <data type="date"/>
+          </element>
+        </optional>
+        <optional>
+          <element>
+            <name ns="http://www.dative.ca/">starts</name>
+            <choice>
+              <data type="int"/>
+              <value></value>
+            </choice>
+          </element>
+        </optional>
+        <optional>
+          <element>
+            <name ns="http://www.dative.ca/">end</name>
+            <choice>
+              <data type="int"/>
+              <value></value>
+            </choice>
+          </element>
+        </optional>
+        <optional>
+          <ref name="Tags"/>
+        </optional>
+        <optional>
+          <element>
+            <name ns="http://www.dative.ca/">description</name>
+            <text/>
+          </element>
+        </optional>
+        <optional>
+          <element>
+            <name ns="http://www.dative.ca/">password</name>
+            <text/>
+          </element>
+        </optional>
+        <optional>
+          <element>
+            <name ns="http://www.dative.ca/">utterance_type</name>
+            <text/>
+          </element>
+        </optional>
+        <optional>
+          <ref name="Enterer"/>
+        </optional>
+        <optional>
+          <ref name="Forms"/>
+        </optional>
+        <optional>
+          <ref name="Elicitor"/>
+        </optional>
+        <optional>
+          <ref name="Speaker"/>
+        </optional>
       </interleave>
     </element>
   </define>

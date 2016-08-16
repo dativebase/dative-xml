@@ -15,22 +15,52 @@ namespace dt = "http://www.dative.ca/"
 start = Dative
 Dative = element dative {
     attribute dt:version { "0.1.0" },
-    ( Forms | Form | Search | Corpus )
+    (
+        Forms |
+        Files |
+        SearchWithForms |
+        CorpusWithForms
+    )
 }
 
-Forms = element forms { Form* }
-Search = element search { Query & Forms }
-Corpus = element corpus { CorpusMeta & Forms }
+###############################################################################
+# Compound Elements
+###############################################################################
 
-Query = element query {
+CorpusWithForms = element corpus_with_forms { Corpus & Forms }
+SearchWithForms = element search_with_forms { Search & Forms }
+
+###############################################################################
+# Plural Elements
+###############################################################################
+
+Files = element files { File* }
+Forms = element forms { Form* }
+Tags = element tags { Tag* }
+
+###############################################################################
+# Plural Elements
+###############################################################################
+
+Search = element search {
   element filter { text } &
   element order_by { text }
 }
 
-# TODO
-# CorpusMeta = element corpus_metadata {
-# }
-CorpusMeta = element corpus_metadata { text }
+Corpus = element corpus {
+  Id &
+  UUID_DEF &
+  element content { text } &
+  DatetimeEntered &
+  DatetimeModified &
+  element description { text } &
+  Enterer &
+  Files &
+  Search &
+  Modifier &
+  element name { text } &
+  Tags
+}
 
 Form = element form {
   Files &
@@ -160,13 +190,11 @@ SyntacticCategory = element syntactic_category {(
   element name { text }) | ""
 }
 
-Tags = element tags { Tag* }
 Tag = element tag {
   element id { xsd:int } &
   element name { text }
 }
 
-Files = element files { File* }
 File = element file {
   element name { text } &
   element url { text } &
@@ -174,7 +202,21 @@ File = element file {
   element lossy_filename { text } &
   element id { xsd:int } &
   element MIME_type { text } &
-  element size { xsd:int }
+  element size { xsd:int } &
+  element parent_file { text }? &
+  element datetime_entered { xsd:dateTime }? &
+  element datetime_modified { xsd:dateTime }? &
+  element date_elicited { xsd:date }? &
+  element starts { xsd:int | "" }? &
+  element end { xsd:int | "" }? &
+  Tags? &
+  element description { text }? &
+  element password { text }? &
+  element utterance_type { text }? &
+  Enterer? &
+  Forms? &
+  Elicitor? &
+  Speaker?
 }
 
 # TODO: this shouldn't be in here. For some reason Dative is creating an empty
